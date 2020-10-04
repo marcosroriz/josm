@@ -1,0 +1,9 @@
+/bin/
+/bintest/
+
+# Eclipse Generated Files
+build/
+build2/
+dist/
+.settings/
+tools/
