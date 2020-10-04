@@ -1,9 +1,12 @@
 /bin/
 /bintest/
 
+# Parser
+src/org/openstreetmap/josm/gui/mappaint/mapcss/parsergen/
+tools/
+
 # Eclipse Generated Files
 build/
 build2/
 dist/
-.settings/
-tools/
+.settings
