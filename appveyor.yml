@@ -1,25 +1,34 @@
-version: '{build}'
 image: Visual Studio 2017
+
+environment:
+  ant_version: "1.10.9"
+  java_version: "jdk11"
+  packr_version: "2.7.0"
+
 install:
-  - cinst ant
-  - refreshenv
-build_script:
-  - ant compile dist distmac checkstyle pmd spotbugs
-test_script:
-  - ant test-unit-hardfail
-on_finish:
+  - ps: iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
   - ps: |
-        $wc = New-Object 'System.Net.WebClient'
-        Get-ChildItem . -Name -Recurse 'TEST-*.xml'  |
-        Foreach-Object {
-            $wc.UploadFile("https://ci.appveyor.com/api/testresults/junit/$($env:APPVEYOR_JOB_ID)", (Resolve-Path $_))
-        }
-  # we want to push test result artifact even if the tests fail, so uploading manually
-  - 7z a test-results.zip test\report\TEST*.xml
-  - ps: Push-AppveyorArtifact test-results.zip
+      Add-Type -AssemblyName System.IO.Compression.FileSystem
+      if (!(Test-Path -Path "C:\ant\apache-ant-1.10.9" )) {
+        (new-object System.Net.WebClient).DownloadFile(
+        'https://archive.apache.org/dist/ant/binaries/apache-ant-1.10.9-bin.zip',
+          'C:\ant-bin.zip'
+        )
+        [System.IO.Compression.ZipFile]::ExtractToDirectory("C:\ant-bin.zip", "C:\ant")
+      }
+  - ps: (new-object net.webclient).DownloadFile('https://github.com/libgdx/packr/releases/download/packr-2.7.0/packr-all-2.7.0.jar', 'packr.jar')
+  - cmd: SET JAVA_HOME="C:\Program Files\Java\jdk11\"
+  - cmd: SET PATH=C:\ant\apache-ant-1.10.9\bin;%JAVA_HOME%\bin;%PATH%
+  - cmd: SET IVY_CACHE_DIR=C:\ivy
+  - cmd: echo %USERPROFILE%
+  - cmd: echo %PATH%
+  - cmd: java -version
+
+build_script:
+  - ant dist
+
+on_finish:
+  - ps: $blockRdp = $true; iex ((new-object net.webclient).DownloadString('https://raw.githubusercontent.com/appveyor/ci/master/scripts/enable-rdp.ps1'))
+
 artifacts:
   - path: dist\josm-custom.*
-  - path: checkstyle-josm.xml
-  - path: pmd-josm.xml
-  - path: spotbugs-josm.xml
-  - path: hs_err_pid*.log
