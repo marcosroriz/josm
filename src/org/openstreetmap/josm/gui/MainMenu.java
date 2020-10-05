@@ -35,7 +35,6 @@ import org.openstreetmap.josm.actions.AlignInLineAction;
 import org.openstreetmap.josm.actions.AutoScaleAction;
 import org.openstreetmap.josm.actions.AutoScaleAction.AutoScaleMode;
 import org.openstreetmap.josm.actions.ChangesetManagerToggleAction;
-import org.openstreetmap.josm.actions.CloseChangesetAction;
 import org.openstreetmap.josm.actions.CombineWayAction;
 import org.openstreetmap.josm.actions.CopyAction;
 import org.openstreetmap.josm.actions.CopyCoordinatesAction;
@@ -47,10 +46,7 @@ import org.openstreetmap.josm.actions.DialogsToggleAction;
 import org.openstreetmap.josm.actions.DistributeAction;
 import org.openstreetmap.josm.actions.DownloadAction;
 import org.openstreetmap.josm.actions.DownloadAlongWayAction;
-import org.openstreetmap.josm.actions.DownloadNotesInViewAction;
 import org.openstreetmap.josm.actions.DownloadOsmInViewAction;
-import org.openstreetmap.josm.actions.DownloadPrimitiveAction;
-import org.openstreetmap.josm.actions.DownloadReferrersAction;
 import org.openstreetmap.josm.actions.DrawBoundariesOfDownloadedDataAction;
 import org.openstreetmap.josm.actions.DuplicateAction;
 import org.openstreetmap.josm.actions.ExitAction;
@@ -92,7 +88,6 @@ import org.openstreetmap.josm.actions.RestartAction;
 import org.openstreetmap.josm.actions.ReverseWayAction;
 import org.openstreetmap.josm.actions.SaveAction;
 import org.openstreetmap.josm.actions.SaveAsAction;
-import org.openstreetmap.josm.actions.SearchNotesDownloadAction;
 import org.openstreetmap.josm.actions.SelectAllAction;
 import org.openstreetmap.josm.actions.SelectNonBranchingWaySequencesAction;
 import org.openstreetmap.josm.actions.SessionSaveAsAction;
@@ -106,7 +101,6 @@ import org.openstreetmap.josm.actions.UndoAction;
 import org.openstreetmap.josm.actions.UnselectAllAction;
 import org.openstreetmap.josm.actions.UpdateDataAction;
 import org.openstreetmap.josm.actions.UpdateModifiedAction;
-import org.openstreetmap.josm.actions.UpdateSelectionAction;
 import org.openstreetmap.josm.actions.UploadAction;
 import org.openstreetmap.josm.actions.UploadSelectionAction;
 import org.openstreetmap.josm.actions.ViewportFollowToggleAction;
@@ -124,7 +118,6 @@ import org.openstreetmap.josm.actions.mapmode.MapMode;
 import org.openstreetmap.josm.actions.search.SearchAction;
 import org.openstreetmap.josm.data.UndoRedoHandler;
 import org.openstreetmap.josm.gui.dialogs.MenuItemSearchDialog;
-import org.openstreetmap.josm.gui.io.OnlineResourceMenu;
 import org.openstreetmap.josm.gui.io.RecentlyOpenedFilesMenu;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeEvent;
 import org.openstreetmap.josm.gui.layer.MainLayerManager.ActiveLayerChangeListener;
@@ -166,8 +159,10 @@ public class MainMenu extends JMenuBar {
     public final OpenFileAction openFile = new OpenFileAction();
     /** File / Open Recent &gt; **/
     public final RecentlyOpenedFilesMenu recentlyOpened = new RecentlyOpenedFilesMenu();
+
     /** File / Open Location... **/
     public final OpenLocationAction openLocation = new OpenLocationAction();
+
     /** File / Delete Layer **/
     public final DeleteLayerAction deleteLayerAction = new DeleteLayerAction();
     /** File / Save **/
@@ -182,20 +177,28 @@ public class MainMenu extends JMenuBar {
     public final DownloadAction download = new DownloadAction();
     /** File / Download in current view **/
     public final DownloadOsmInViewAction downloadInView = new DownloadOsmInViewAction();
+
     /** File / Download object... **/
-    public final DownloadPrimitiveAction downloadPrimitive = new DownloadPrimitiveAction();
+    //public final DownloadPrimitiveAction downloadPrimitive = new DownloadPrimitiveAction();
+
     /** File / Download notes in current view **/
-    public final DownloadNotesInViewAction downloadNotesInView = DownloadNotesInViewAction.newActionWithNoteIcon();
+    //public final DownloadNotesInViewAction downloadNotesInView = DownloadNotesInViewAction.newActionWithNoteIcon();
+
     /** File / Search Notes... **/
-    public final SearchNotesDownloadAction searchNotes = new SearchNotesDownloadAction();
+    //public final SearchNotesDownloadAction searchNotes = new SearchNotesDownloadAction();
+
     /** File / Download parent ways/relations... **/
-    public final DownloadReferrersAction downloadReferrers = new DownloadReferrersAction();
+    //public final DownloadReferrersAction downloadReferrers = new DownloadReferrersAction();
+
     /** File / Close open changesets... **/
-    public final CloseChangesetAction closeChangesetAction = new CloseChangesetAction();
+    //public final CloseChangesetAction closeChangesetAction = new CloseChangesetAction();
+
     /** File / Update data **/
     public final JosmAction update = new UpdateDataAction();
+
     /** File / Update selection **/
-    public final JosmAction updateSelection = new UpdateSelectionAction();
+    //public final JosmAction updateSelection = new UpdateSelectionAction();
+
     /** File / Update modified **/
     public final JosmAction updateModified = new UpdateModifiedAction();
     /** File / Upload data **/
@@ -729,7 +732,7 @@ public class MainMenu extends JMenuBar {
         add(fileMenu, newAction);
         add(fileMenu, openFile);
         fileMenu.add(recentlyOpened);
-        add(fileMenu, openLocation);
+        //add(fileMenu, openLocation);
         add(fileMenu, deleteLayerAction);
         fileMenu.addSeparator();
         add(fileMenu, save);
@@ -741,22 +744,22 @@ public class MainMenu extends JMenuBar {
         add(fileMenu, download);
         add(fileMenu, downloadInView, true);
         add(fileMenu, downloadAlongWay);
-        add(fileMenu, downloadPrimitive);
-        add(fileMenu, searchNotes);
-        add(fileMenu, downloadNotesInView);
-        add(fileMenu, downloadReferrers);
-        add(fileMenu, update);
-        add(fileMenu, updateSelection);
-        add(fileMenu, updateModified);
+        //add(fileMenu, downloadPrimitive);
+        //add(fileMenu, searchNotes);
+        //add(fileMenu, downloadNotesInView);
+        //add(fileMenu, downloadReferrers);
+        //add(fileMenu, update);
+        //add(fileMenu, updateSelection);
+        //add(fileMenu, updateModified);
         fileMenu.addSeparator();
         add(fileMenu, upload);
         add(fileMenu, uploadSelection);
         Component sep = new JPopupMenu.Separator();
         fileMenu.add(sep);
         ExpertToggleAction.addVisibilitySwitcher(sep);
-        add(fileMenu, closeChangesetAction, true);
+        //add(fileMenu, closeChangesetAction, true);
         fileMenu.addSeparator();
-        fileMenu.add(new OnlineResourceMenu());
+        //fileMenu.add(new OnlineResourceMenu());
         add(fileMenu, restart);
         add(fileMenu, exit);
 

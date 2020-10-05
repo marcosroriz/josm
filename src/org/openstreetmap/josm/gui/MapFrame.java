@@ -59,19 +59,15 @@ import org.openstreetmap.josm.data.ViewportData;
 import org.openstreetmap.josm.data.preferences.AbstractProperty;
 import org.openstreetmap.josm.data.preferences.BooleanProperty;
 import org.openstreetmap.josm.data.preferences.IntegerProperty;
-import org.openstreetmap.josm.gui.dialogs.ChangesetDialog;
-import org.openstreetmap.josm.gui.dialogs.CommandStackDialog;
 import org.openstreetmap.josm.gui.dialogs.ConflictDialog;
 import org.openstreetmap.josm.gui.dialogs.DialogsPanel;
 import org.openstreetmap.josm.gui.dialogs.FilterDialog;
 import org.openstreetmap.josm.gui.dialogs.LayerListDialog;
 import org.openstreetmap.josm.gui.dialogs.MapPaintDialog;
-import org.openstreetmap.josm.gui.dialogs.MinimapDialog;
 import org.openstreetmap.josm.gui.dialogs.NotesDialog;
 import org.openstreetmap.josm.gui.dialogs.RelationListDialog;
 import org.openstreetmap.josm.gui.dialogs.SelectionListDialog;
 import org.openstreetmap.josm.gui.dialogs.ToggleDialog;
-import org.openstreetmap.josm.gui.dialogs.UserListDialog;
 import org.openstreetmap.josm.gui.dialogs.ValidatorDialog;
 import org.openstreetmap.josm.gui.dialogs.properties.PropertiesDialog;
 import org.openstreetmap.josm.gui.layer.Layer;
@@ -274,16 +270,16 @@ public class MapFrame extends JPanel implements Destroyable, ActiveLayerChangeLi
         addToggleDialog(LayerListDialog.getInstance());
         addToggleDialog(propertiesDialog);
         addToggleDialog(selectionListDialog);
-        addToggleDialog(relationListDialog);
-        addToggleDialog(new MinimapDialog());
-        addToggleDialog(new CommandStackDialog());
-        addToggleDialog(new UserListDialog());
-        addToggleDialog(conflictDialog);
-        addToggleDialog(validatorDialog);
-        addToggleDialog(filterDialog);
-        addToggleDialog(new ChangesetDialog(), true);
+//        addToggleDialog(relationListDialog);
+//        addToggleDialog(new MinimapDialog());
+//        addToggleDialog(new CommandStackDialog());
+//        addToggleDialog(new UserListDialog());
+//        addToggleDialog(conflictDialog);
+//        addToggleDialog(validatorDialog);
+//        addToggleDialog(filterDialog);
+//        addToggleDialog(new ChangesetDialog(), true);
         addToggleDialog(mapPaintDialog);
-        addToggleDialog(noteDialog);
+//        addToggleDialog(noteDialog);
         toolBarToggle.setFloatable(false);
 
         // status line below the map
@@ -524,7 +520,7 @@ public class MapFrame extends JPanel implements Destroyable, ActiveLayerChangeLi
             toolBarActions.setBorder(null);
             toolBarActions.setInheritsPopupMenu(true);
             sideToolBar.add(toolBarActions);
-            sideToolBar.add(listAllMapModesAction.createButton());
+            //sideToolBar.add(listAllMapModesAction.createButton());
         }
 
         /**
@@ -536,13 +532,13 @@ public class MapFrame extends JPanel implements Destroyable, ActiveLayerChangeLi
             toolBarToggle.setBorder(null);
             toolBarToggle.setInheritsPopupMenu(true);
             sideToolBar.add(toolBarToggle);
-            sideToolBar.add(listAllDialogsAction.createButton());
+            //sideToolBar.add(listAllDialogsAction.createButton());
         }
 
         /**
          * sideToolBar: add dynamic popup menu
          */
-        sideToolBar.setComponentPopupMenu(new SideToolbarPopupMenu());
+        //sideToolBar.setComponentPopupMenu(new SideToolbarPopupMenu());
         ((JToolBar) sideToolBar).setFloatable(false);
         sideToolBar.setBorder(BorderFactory.createEmptyBorder(0, 1, 0, 1));
 
